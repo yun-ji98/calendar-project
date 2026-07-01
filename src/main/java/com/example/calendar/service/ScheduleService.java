@@ -34,5 +34,18 @@ public class ScheduleService {
         return dtos;
     }
 
+    @Transactional(readOnly = true)
+    public ResponseDto getOne(Long Id) {
+        Schedule schedule = scheduleRepository.findById(Id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 ID 입니다.")
+        );
+        return new ResponseDto(
+                schedule.getId(),
+                schedule.getWriter(),
+                schedule.getTitle(),
+                schedule.getMessage()
+        );
+    }
+
 
 }
