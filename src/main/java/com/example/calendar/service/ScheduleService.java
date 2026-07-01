@@ -47,5 +47,15 @@ public class ScheduleService {
         );
     }
 
+    @Transactional
+    public void delete(Long Id) {
+        boolean existence = scheduleRepository.existsById(Id);
+        if (!existence) {
+            throw new IllegalStateException("존재하지 않는 유저입니다.");
+        }
+
+        scheduleRepository.deleteById(Id);
+    }
+
 
 }
